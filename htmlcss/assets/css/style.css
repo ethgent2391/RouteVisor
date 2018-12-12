@@ -1,0 +1,45 @@
+:root {
+    --dark-blue: #033f57;
+    --medium-blue: #026470;
+    --dark--turquoise: #009484;
+    --medium--turquoise: #02B28D;
+}
+
+label, #form h4, section h4, .card-title, .card-text {
+    color: var(--dark-blue);
+}
+
+header.jumbotron {
+    padding: 15px;
+    background-color: var(--medium-blue);
+    color: white;
+}
+
+#googlemaps { 
+    margin-top: 85px;
+    height: 100vh;
+    width: 100%; 
+    position:absolute; 
+    top: 0; 
+    left: 0; 
+    z-index: 0; /* Set z-index to 0 as it will be on a layer below the contact form */
+  }
+  
+main, section, header { 
+    position: relative; 
+    z-index: 1; /* The z-index should be higher than Google Maps */
+}
+
+form {
+    background-color: rgba(255,255,255,.95);
+    border-radius: 8px;
+}
+
+#button {
+    background-color: var(--dark--turquoise);
+    border-color: var(--dark--turquoise);
+}
+
+.facebook_iframe {
+    margin-top: 10px;
+}
