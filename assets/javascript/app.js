@@ -12,10 +12,10 @@ function AutocompleteDirectionsHandler(map) {
   this.map = map;
   this.originPlaceId = null;
   this.destinationPlaceId = null;
-  this.travelMode = 'WALKING';
+  this.travelMode = 'DRIVING';
   var originInput = document.getElementById('start-point');
   var destinationInput = document.getElementById('destination');
-  var modeSelector = document.getElementById('mode-selector');
+  // var modeSelector = document.getElementById('mode-selector');
   this.directionsService = new google.maps.DirectionsService;
   this.directionsDisplay = new google.maps.DirectionsRenderer;
   this.directionsDisplay.setMap(map);
@@ -36,20 +36,21 @@ function AutocompleteDirectionsHandler(map) {
 
 // Sets a listener on a radio button to change the filter type on Places
 // Autocomplete.
-AutocompleteDirectionsHandler.prototype.setupClickListener = function(id, mode) {
-  var radioButton = document.getElementById(id);
-  var me = this;
-  radioButton.addEventListener('click', function() {
-    me.travelMode = mode;
-    me.route();
-  });
-};
+// AutocompleteDirectionsHandler.prototype.setupClickListener = function(id, mode) {
+//   var radioButton = document.getElementById(id);
+//   var me = this;
+//   radioButton.addEventListener('click', function() {
+//     me.travelMode = mode;
+//     me.route();
+//   });
+// };
 
 AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode) {
   var me = this;
   autocomplete.bindTo('bounds', this.map);
   autocomplete.addListener('place_changed', function() {
     var place = autocomplete.getPlace();
+    console.log(place);
     if (!place.place_id) {
       window.alert("Please select an option from the dropdown list.");
       return;
@@ -69,15 +70,22 @@ AutocompleteDirectionsHandler.prototype.route = function() {
     return;
   }
   var me = this;
-
+  var waypts = [];
   this.directionsService.route({
     origin: {'placeId': this.originPlaceId},
     destination: {'placeId': this.destinationPlaceId},
-    travelMode: this.travelMode
+    travelMode: this.travelMode,
+    waypoints: waypts
   }, function(response, status) {
     if (status === 'OK') {
       me.directionsDisplay.setDirections(response);
-    } else {
+      for (i=0; i<response.routes[0].legs[0].steps.length; i++) {
+        console.log(response.routes[0].legs[0].steps[i]);
+        waypts.push(response.routes[0].legs[0].steps[i].end_point);
+      };
+      console.log(waypts);
+      }
+      else {
       window.alert('Directions request failed due to ' + status);
     }
   });
