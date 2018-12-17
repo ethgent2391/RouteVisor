@@ -103,6 +103,10 @@ $("#button").on("click", function () {
 
     var stepDistance;
     var totalStepDistance;
+    var totalTripDistance;
+    var totalTripDistanceMiles;
+    var stepDistanceMiles;
+    var stepsArrayLength;
 
     tripDistanceInput = 400; // user input number of miles to travel before stopping 
     console.log(responseObject);
@@ -140,13 +144,36 @@ $("#button").on("click", function () {
                 // Create a marker and set its position.
                 myLatLng = position;
 
-                var marker = new google.maps.Marker({
+                marker = new google.maps.Marker({
                     map: map,
                     position: myLatLng,
                     title: 'Stop Point!'
                 });
                 console.log(myLatLng);
+                // infowindow = new google.maps.InfoWindow();
+                var service = new google.maps.places.PlacesService(map);
+                service.nearbySearch({
+                    location: position,
+                    radius: 500,
+                    type: ['lodging']
+                    }, callback);
 
+                function callback(results, status) {
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        for (var i = 0; i < results.length; i++) {
+                            createMarker(results[i]);
+                        }
+                    }
+                }
+
+                function createMarker(place) {
+                var placeLoc = place.geometry.location;
+                marker = new google.maps.Marker({
+                map: map,
+                position: placeLoc
+                });
+
+            }
                 break;
             }
         }
@@ -155,6 +182,5 @@ $("#button").on("click", function () {
         }
 
     }
-
-})
-
+    
+});
