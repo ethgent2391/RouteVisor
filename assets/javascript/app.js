@@ -257,18 +257,6 @@ $("#button").on("click", function () {
             waypointsArray: waypointsArray
 
         });
-
-        function createMarker(place) {
-            var placeLoc = place.geometry.location;
-            marker = new google.maps.Marker({
-                map: map,
-                position: placeLoc
-            });
-            google.maps.event.addListener(marker, 'click', function() {
-                infowindow.setContent(place.name);
-                infowindow.open(map, this);
-            });
-        }
-    }
+    
     
 });
