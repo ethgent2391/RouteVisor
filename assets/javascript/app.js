@@ -4,19 +4,86 @@ var position;
 var marker;
 var responseObject;
 var tripDistanceInput;
-var infowindow;
+var infowindow = new google.maps.InfoWindow();
+
+var request;
+var service;
+var markers = [];
+
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyDdkCpU7scT-GHisDWX3MgHfBBG3oyDmjc",
+    authDomain: "trip-planner-1544292860193.firebaseapp.com",
+    databaseURL: "https://trip-planner-1544292860193.firebaseio.com",
+    projectId: "trip-planner-1544292860193",
+    storageBucket: "trip-planner-1544292860193.appspot.com",
+    messagingSenderId: "676595493403"
+};
+firebase.initializeApp(config);
+var database = firebase.database();
 
 function initMap() {
+    var center = new google.maps.LatLng(41.093598, -81.4393721);
     map = new google.maps.Map(document.getElementById('map'), {
         mapTypeControl: false,
         center: { lat: 41.093598, lng: -81.4393721 },
         zoom: 4
 
     });
+    request = {
+        location: center,
+        radius: 4000,
+        types: ['lodging']
+    };
+    service = new google.maps.places.PlacesService(map);
 
+    service.nearbySearch(request, callback);
+
+    google.maps.event.addListener(map, 'rightclick', function (event) {
+        map.setCenter(event.latLng)
+        clearResults(markers)
+
+        var request = {
+            location: event.latLng,
+            radius: 4000,
+            types: ['lodging']
+        };
+        service.nearbySearch(request, callback);
+    })
 
     new AutocompleteDirectionsHandler(map);
 }
+
+function callback(results, status) {
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+        for (var i = 0; i < results.length; i++) {
+            markers.push(createMarker(results[i]));
+        }
+    }
+}
+
+function createMarker(place) {
+    var placeLoc = place.geometry.location;
+    var marker = new google.maps.Marker({
+        map: map,
+        position: place.geometry.location
+    });
+    marker.addListener('click', function () {
+        infowindow.open(map, marker);
+        infowindow.setContent(place.name);
+    })
+    return marker;
+}
+
+function clearResults(markers) {
+    for (var m in markers) {
+        markers[m].setMap(null)
+    }
+    markers = [];
+}
+
+google.maps.event.addDomListener(window, 'load', initMap);
+
 
 function AutocompleteDirectionsHandler(map) {
     this.map = map;
@@ -134,56 +201,62 @@ $("#button").on("click", function () {
 
         // console.log(totalStepDistance);
         // console.log(i);
-        
-            //checks to verify if total trip distance is greater than user distance input
-            if (totalTripDistanceMiles >= tripDistanceInput) {
-                // console.log("distance is greater than " + tripDistanceInput + " miles");
 
-                if (totalStepDistance >= tripDistanceInput) {
-                    position = responseObject.routes[0].legs[0].steps[i].end_location;
+        //checks to verify if total trip distance is greater than user distance input
+        if (totalTripDistanceMiles >= tripDistanceInput) {
+            // console.log("distance is greater than " + tripDistanceInput + " miles");
 
-                    // Create a marker and set its position.
-                    // myLatLng = position;
+            if (totalStepDistance >= tripDistanceInput) {
+                position = responseObject.routes[0].legs[0].steps[i].end_location;
 
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        position: position,
-                        title: 'Stop Point!'
+                // Create a marker and set its position.
+                myLatLng = position;
 
-                    });
-                    // console.log(responseObject.routes[0].legs[0].steps[i]);
-                    // console.log(myLatLng);
-                    tripDistanceInput = tripDistanceInput + tripIncriment; //add trip max daily distance 
-                    waypointsArray.push(position);
-                    console.log(waypointsArray);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: myLatLng,
+                    title: 'Stop Point!'
 
-                }
+                });
+                // console.log(responseObject.routes[0].legs[0].steps[i]);
+                // console.log(myLatLng);
+                tripDistanceInput = tripDistanceInput + tripIncriment; //add trip max daily distance 
+                waypointsArray.push(myLatLng);
+                console.log(waypointsArray);
 
-                
-                    console.log(tripDistanceInput);
-             
+
             }
-        
-        else {      
+
+
+            console.log(tripDistanceInput);
+
+
+
+        }
+
+        else {
+
         }
     }
-    
-    infowindow = new google.maps.InfoWindow();
-    var service = new google.maps.places.PlacesService(map);
-    for (i=0; i<waypointsArray.length; i++) { 
-        service.nearbySearch({
-            location: waypointsArray[i],
-            radius: 50,
-            type: ['lodging']
-            }, callback);
 
-        function callback(results, status) {
-            if (status === google.maps.places.PlacesServiceStatus.OK) {
+    waypointsArray.forEach(function (latLng) {
+        service.nearbySearch({
+            location: latLng,
+            radius: 3218,
+            types: ['lodging']
+        }, function (results, status) {
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
                 for (var i = 0; i < results.length; i++) {
-                    createMarker(results[i]);
+                    markers.push(createMarker(results[i]));
                 }
             }
-        }
+        });
+    });
+    google.maps.event.addDomListener(window, 'load', initMap);
+    database.ref().push({
+            waypointsArray: waypointsArray
+
+        });
 
         function createMarker(place) {
             var placeLoc = place.geometry.location;
