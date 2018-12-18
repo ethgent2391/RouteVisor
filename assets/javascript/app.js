@@ -170,6 +170,27 @@ $("#button").on("click", function () {
         }
 
     }
+    var service = new google.maps.places.PlacesService(map);
+                service.nearbySearch({
+                    location: position,
+                    radius: 500,
+                    type: ['lodging']
+                    }, callback);
 
-})
+                function callback(results, status) {
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        for (var i = 0; i < results.length; i++) {
+                            createMarker(results[i]);
+                        }
+                    }
+                }
 
+                function createMarker(place) {
+                var placeLoc = place.geometry.location;
+                marker = new google.maps.Marker({
+                map: map,
+                position: placeLoc
+                });
+
+            }
+});
