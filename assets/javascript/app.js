@@ -143,37 +143,34 @@ $("#button").on("click", function () {
                     position = responseObject.routes[0].legs[0].steps[i].end_location;
 
                     // Create a marker and set its position.
-                    myLatLng = position;
+                    // myLatLng = position;
 
                     var marker = new google.maps.Marker({
                         map: map,
-                        position: myLatLng,
+                        position: position,
                         title: 'Stop Point!'
 
                     });
                     // console.log(responseObject.routes[0].legs[0].steps[i]);
                     // console.log(myLatLng);
                     tripDistanceInput = tripDistanceInput + tripIncriment; //add trip max daily distance 
-                    waypointsArray.push(myLatLng);
+                    waypointsArray.push(position);
                     console.log(waypointsArray);
 
                 }
 
                 
                     console.log(tripDistanceInput);
-                   
-
-
+             
             }
         
-        else {
-               
+        else {      
         }
-
     }
-    for (i=0; i<waypointsArray.length; i++) {
-        infowindow = new google.maps.InfoWindow();
-        var service = new google.maps.places.PlacesService(map);
+    
+    infowindow = new google.maps.InfoWindow();
+    var service = new google.maps.places.PlacesService(map);
+    for (i=0; i<waypointsArray.length; i++) { 
         service.nearbySearch({
             location: waypointsArray[i],
             radius: 50,
@@ -197,7 +194,7 @@ $("#button").on("click", function () {
             google.maps.event.addListener(marker, 'click', function() {
                 infowindow.setContent(place.name);
                 infowindow.open(map, this);
-              });
+            });
         }
     }
     
