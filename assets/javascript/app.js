@@ -6,7 +6,7 @@ var responseObject;
 var tripDistanceInput;
 
 function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById('map'), {
         mapTypeControl: false,
         center: { lat: 41.093598, lng: -81.4393721 },
         zoom: 4
@@ -103,8 +103,11 @@ $("#button").on("click", function () {
 
     var stepDistance;
     var totalStepDistance;
-
-    tripDistanceInput = 400; // user input number of miles to travel before stopping 
+    var waypointsArray = [];
+    tripDistanceInput = $("#max-travel-dist").val().trim();// user input number of miles to travel before stopping
+    tripDistanceInput = parseInt(tripDistanceInput);
+    console.log(tripDistanceInput);
+    tripIncriment = tripDistanceInput;
     console.log(responseObject);
     // console.log(response.routes[0].legs[0].steps);
 
@@ -116,7 +119,7 @@ $("#button").on("click", function () {
     stepDistanceMiles = stepDistance / 1609.344;//step distance value converted in miles
     totalStepDistance = 0; //all the steps added up to total distance
 
-
+    console.log(totalTripDistance);
     console.log(stepDistanceMiles);
     console.log(stepsArrayLength);
     console.log(totalTripDistanceMiles);
@@ -130,28 +133,40 @@ $("#button").on("click", function () {
 
         // console.log(totalStepDistance);
         // console.log(i);
-        //checks to verify if total trip distance is greater than user distance input
-        if (totalTripDistanceMiles >= tripDistanceInput) {
-            // console.log("distance is greater than " + tripDistanceInput + " miles");
+        
+            //checks to verify if total trip distance is greater than user distance input
+            if (totalTripDistanceMiles >= tripDistanceInput) {
+                // console.log("distance is greater than " + tripDistanceInput + " miles");
 
-            if (totalStepDistance >= tripDistanceInput) {
-                position = responseObject.routes[0].legs[0].steps[i].end_location;
-                console.log(position);
-                // Create a marker and set its position.
-                myLatLng = position;
+                if (totalStepDistance >= tripDistanceInput) {
+                    position = responseObject.routes[0].legs[0].steps[i].end_location;
 
-                var marker = new google.maps.Marker({
-                    map: map,
-                    position: myLatLng,
-                    title: 'Stop Point!'
-                });
-                console.log(myLatLng);
+                    // Create a marker and set its position.
+                    myLatLng = position;
 
-                break;
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: myLatLng,
+                        title: 'Stop Point!'
+
+                    });
+                    // console.log(responseObject.routes[0].legs[0].steps[i]);
+                    // console.log(myLatLng);
+                    tripDistanceInput = tripDistanceInput + tripIncriment; //add trip max daily distance 
+                    waypointsArray.push(myLatLng);
+                    console.log(waypointsArray);
+
+                }
+
+                
+                    console.log(tripDistanceInput);
+                   
+
+
             }
-        }
+        
         else {
-
+               
         }
 
     }
