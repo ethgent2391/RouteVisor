@@ -107,8 +107,9 @@ $("#button").on("click", function () {
     var totalTripDistanceMiles;
     var stepDistanceMiles;
     var stepsArrayLength;
+    var waypts_array = [];
 
-    tripDistanceInput = 400; // user input number of miles to travel before stopping 
+    tripDistanceInput = 40; // user input number of miles to travel before stopping 
     console.log(responseObject);
     // console.log(response.routes[0].legs[0].steps);
 
@@ -150,8 +151,19 @@ $("#button").on("click", function () {
                     title: 'Stop Point!'
                 });
                 console.log(myLatLng);
-                // infowindow = new google.maps.InfoWindow();
-                var service = new google.maps.places.PlacesService(map);
+                infowindow = new google.maps.InfoWindow();
+                
+                waypts_array.push(myLatLng);
+                console.log(waypts_array);
+                break;
+            }
+        }
+        else {
+
+        }
+
+    }
+    var service = new google.maps.places.PlacesService(map);
                 service.nearbySearch({
                     location: position,
                     radius: 500,
@@ -174,13 +186,4 @@ $("#button").on("click", function () {
                 });
 
             }
-                break;
-            }
-        }
-        else {
-
-        }
-
-    }
-    
 });
