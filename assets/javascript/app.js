@@ -239,6 +239,7 @@ $("#button").on("click", function () {
         }
 
     }
+
     waypointsArray.forEach(function (latLng) {
         service.nearbySearch({
             location: latLng,
@@ -258,5 +259,12 @@ $("#button").on("click", function () {
 
         });
 
-})
+                function createMarker(place) {
+                var placeLoc = place.geometry.location;
+                marker = new google.maps.Marker({
+                map: map,
+                position: placeLoc
+                });
 
+            }
+});
