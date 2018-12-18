@@ -4,6 +4,7 @@ var position;
 var marker;
 var responseObject;
 var tripDistanceInput;
+var infowindow;
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -170,27 +171,34 @@ $("#button").on("click", function () {
         }
 
     }
-    var service = new google.maps.places.PlacesService(map);
-                service.nearbySearch({
-                    location: position,
-                    radius: 500,
-                    type: ['lodging']
-                    }, callback);
+    for (i=0; i<waypointsArray.length; i++) {
+        infowindow = new google.maps.InfoWindow();
+        var service = new google.maps.places.PlacesService(map);
+        service.nearbySearch({
+            location: waypointsArray[i],
+            radius: 50,
+            type: ['lodging']
+            }, callback);
 
-                function callback(results, status) {
-                    if (status === google.maps.places.PlacesServiceStatus.OK) {
-                        for (var i = 0; i < results.length; i++) {
-                            createMarker(results[i]);
-                        }
-                    }
+        function callback(results, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                for (var i = 0; i < results.length; i++) {
+                    createMarker(results[i]);
                 }
+            }
+        }
 
-                function createMarker(place) {
-                var placeLoc = place.geometry.location;
-                marker = new google.maps.Marker({
+        function createMarker(place) {
+            var placeLoc = place.geometry.location;
+            marker = new google.maps.Marker({
                 map: map,
                 position: placeLoc
-                });
-
-            }
+            });
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.setContent(place.name);
+                infowindow.open(map, this);
+              });
+        }
+    }
+    
 });
