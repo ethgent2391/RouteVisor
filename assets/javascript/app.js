@@ -5,6 +5,18 @@ var marker;
 var responseObject;
 var tripDistanceInput;
 
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyDdkCpU7scT-GHisDWX3MgHfBBG3oyDmjc",
+    authDomain: "trip-planner-1544292860193.firebaseapp.com",
+    databaseURL: "https://trip-planner-1544292860193.firebaseio.com",
+    projectId: "trip-planner-1544292860193",
+    storageBucket: "trip-planner-1544292860193.appspot.com",
+    messagingSenderId: "676595493403"
+};
+firebase.initializeApp(config);
+var database = firebase.database();
+
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         mapTypeControl: false,
@@ -133,43 +145,47 @@ $("#button").on("click", function () {
 
         // console.log(totalStepDistance);
         // console.log(i);
-        
-            //checks to verify if total trip distance is greater than user distance input
-            if (totalTripDistanceMiles >= tripDistanceInput) {
-                // console.log("distance is greater than " + tripDistanceInput + " miles");
 
-                if (totalStepDistance >= tripDistanceInput) {
-                    position = responseObject.routes[0].legs[0].steps[i].end_location;
+        //checks to verify if total trip distance is greater than user distance input
+        if (totalTripDistanceMiles >= tripDistanceInput) {
+            // console.log("distance is greater than " + tripDistanceInput + " miles");
 
-                    // Create a marker and set its position.
-                    myLatLng = position;
+            if (totalStepDistance >= tripDistanceInput) {
+                position = responseObject.routes[0].legs[0].steps[i].end_location;
 
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        position: myLatLng,
-                        title: 'Stop Point!'
+                // Create a marker and set its position.
+                myLatLng = position;
 
-                    });
-                    // console.log(responseObject.routes[0].legs[0].steps[i]);
-                    // console.log(myLatLng);
-                    tripDistanceInput = tripDistanceInput + tripIncriment; //add trip max daily distance 
-                    waypointsArray.push(myLatLng);
-                    console.log(waypointsArray);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: myLatLng,
+                    title: 'Stop Point!'
 
-                }
-
-                
-                    console.log(tripDistanceInput);
-                   
+                });
+                // console.log(responseObject.routes[0].legs[0].steps[i]);
+                // console.log(myLatLng);
+                tripDistanceInput = tripDistanceInput + tripIncriment; //add trip max daily distance 
+                waypointsArray.push(myLatLng);
+                console.log(waypointsArray);
 
 
             }
-        
+
+
+            console.log(tripDistanceInput);
+
+
+
+        }
+
         else {
-               
+
         }
 
     }
-
-})
+    database.ref().push({
+        waypointsArray: waypointsArray
+    });
+       
+    })
 
