@@ -103,21 +103,11 @@ $("#button").on("click", function () {
 
     var stepDistance;
     var totalStepDistance;
-<<<<<<< HEAD
-    var totalTripDistance;
-    var totalTripDistanceMiles;
-    var stepDistanceMiles;
-    var stepsArrayLength;
-    var waypts_array = [];
-
-    tripDistanceInput = 40; // user input number of miles to travel before stopping 
-=======
     var waypointsArray = [];
     tripDistanceInput = $("#max-travel-dist").val().trim();// user input number of miles to travel before stopping
     tripDistanceInput = parseInt(tripDistanceInput);
     console.log(tripDistanceInput);
     tripIncriment = tripDistanceInput;
->>>>>>> c74f3acd76c18c8ec5d295e9eb8275509eefe39d
     console.log(responseObject);
     // console.log(response.routes[0].legs[0].steps);
 
