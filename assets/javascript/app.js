@@ -147,23 +147,45 @@ $(document).ready(function () {
             }
             me.route();
         });
-
+    
     };
-
+    
     AutocompleteDirectionsHandler.prototype.route = function () {
         if (!this.originPlaceId || !this.destinationPlaceId) {
             return;
         }
-        responseObject = response;
-        console.log(responseObject);
-        
-        instructions = response.routes[0].legs[0].steps.map((step) => step.instructions);
-        debugger;
-        for(var i=0; i<instructions.length; i++) {
-            $("#directionsPanel").append(instructions[i]);
-        };
-    };
-});
+        var me = this;
+    
+        this.directionsService.route({
+            origin: { 'placeId': this.originPlaceId },
+            destination: { 'placeId': this.destinationPlaceId },
+            travelMode: this.travelMode
+        }, function (response, status) {
+            if (status === 'OK') {
+                me.directionsDisplay.setDirections(response);
+            } else {
+                window.alert('Directions request failed due to ' + status);
+            }
+            responseObject = response;
+            console.log(responseObject);
+            
+            instructions = response.routes[0].legs[0].steps.map((step) => step.instructions);
+    
+            console.log(instructions);
+
+            $("#directionsPanel").append(
+                `<h4>${response.routes[0].legs[0].start_address} to ${response.routes[0].legs[0].end_address}</h4>
+                <h5>Distance: ${response.routes[0].legs[0].distance.text}</h5>
+                <h5>Duration: ${response.routes[0].legs[0].duration.text}</h5>`)
+    
+            for(var i=0; i<instructions.length; i++) {
+                $("#directionsPanel").append(
+                    `<ol class= 'ordered-list'>
+                        <li>${instructions[i]}</li>
+                    </ol>`)
+            };
+    });
+};
 
 
 
@@ -267,4 +289,4 @@ $("#submit-button").on("click", function () {
           
 });
 
-// routes[0].legs[0].steps[i].instructions
+})
