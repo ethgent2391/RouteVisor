@@ -263,14 +263,7 @@ $("#submit-button").on("click", function () {
 
         });
 
-                function createMarker(place) {
-                var placeLoc = place.geometry.location;
-                marker = new google.maps.Marker({
-                map: map,
-                position: placeLoc
-                });
-
-            }
+          
 });
 
 // routes[0].legs[0].steps[i].instructions
