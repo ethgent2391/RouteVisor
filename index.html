@@ -2,19 +2,26 @@
 <html>
 
 <head>
-    <title>Travel App</title>
+    <title>RouteVisor</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:url"           content="https://www.your-domain.com/your-page.html" />
+  
+    <!-- Facebook Share Button Meta Tags -->
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="RouteVisor" />
+    <meta property="og:description"   content="Don't drive drowsy! Plan to take a break along your route." />
+    <meta property="og:image"         content="https://ethgent2391.github.io/groupwo…" />
 
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
-   
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFhkxjfneoXB2xv2kVRkO376AHqTXyqzU&libraries=places&callback=initMap"
     async defer></script>
 
@@ -24,14 +31,15 @@
 
 
     <header class="jumbotron jumbotron-fluid">
-        <h1 class="display-12">Travel App</h1>
+        <h1 class="display-12">RouteVisor</h1>
+        <h4 class="display-25">Don't drive drowsy! Plan to take a break along your route.</h4>
     </header>
 
     <form class="col-md-4 p-3 mr-3 float-right" id="form">
         <h4>Enter your trip details</h4>
 
         <div class="row form-group col-md-12">
-            <label for="train-name">Start Point</label>
+            <label for="origin">Start Point</label>
             <input type="text" class="form-control" id="start-point" placeholder="Choose a starting location">
         </div>
         <div class="row form-group col-md-12">
@@ -39,35 +47,14 @@
             <input type="text" class="form-control" id="destination" placeholder="Choose a destination">
         </div>
         <div class="row form-group col-md-12">
-            <label for="first-train-time">Travel Distance Per Day (Miles)</label>
+            <label for="travel-distance-per-day">Travel Distance Per Day (Miles)</label>
             <input type="number" class="form-control" id="max-travel-dist" placeholder="Miles">
         </div>
-        <div class="row form-group col-md-12">
-            <label for="train-name">Departure Time: (optional)</label>
-            <input type="text" class="form-control" id="depart-time" placeholder="Departure time">
-        </div>
 
-
-        <div class="row form-group col-md-12">
-            <label for="train-name">Arrival Time: (optional)</label>
-            <input type="text" class="form-control" id="arrival-time" placeholder="Arrival time">
-        </div>
-
-        <h4 class="mt-3">Enter your hotel specifications (optional)</h4>
-        <div class="row form-group col-md-12">
-            <label for="Frequency">Brand Preference</label>
-            <input type="text" class="form-control" id="hotel-brand" placeholder="Hotel brand preference">
-        </div>
-        <div class="row form-group col-md-12">
-            <label for="Frequency">Maximum Nightly Rate</label>
-            <input type="text" class="form-control" id="hotel-rate" placeholder="Maximum nightly rate">
-        </div>
         <button type="button" id="button" class="btn btn-primary">Submit</button>
 
         <!--Facebook iframe-->
-        <iframe class="facebook_iframe" src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button_count&size=large&mobile_iframe=true&width=106&height=28&appId"
-            width="106" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
-            allowTransparency="true" allow="encrypted-media"></iframe>
+        <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fethgent2391.github.io%2Fgroupwo%E2%80%A6&layout=button_count&size=large&mobile_iframe=true&width=84&height=28&appId" width="84" height="28" style="border:none;overflow:hidden;display:block;margin-top:10px" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
 
     </form>
     <!-- ignore this I have it hidden through css but i couldnt get it to display the route without them??? -->
