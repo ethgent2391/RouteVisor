@@ -173,9 +173,17 @@ $(document).ready(function () {
     
             console.log(instructions);
 
-        for(var i=0; i<instructions.length; i++) {
-            $("#directionsPanel").append(instructions[i]);
-        };
+            $("#directionsPanel").append(
+                `<h4>${response.routes[0].legs[0].start_address} to ${response.routes[0].legs[0].end_address}</h4>
+                <h5>Distance: ${response.routes[0].legs[0].distance.text}</h5>
+                <h5>Duration: ${response.routes[0].legs[0].duration.text}</h5>`)
+    
+            for(var i=0; i<instructions.length; i++) {
+                $("#directionsPanel").append(
+                    `<ol class= 'ordered-list'>
+                        <li>${instructions[i]}</li>
+                    </ol>`)
+            };
     });
 };
 
