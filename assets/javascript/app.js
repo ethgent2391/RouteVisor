@@ -5,6 +5,7 @@ var marker;
 var responseObject;
 var tripDistanceInput;
 var infowindow = new google.maps.InfoWindow();
+var instructions;
 
 var request;
 var service;
@@ -159,15 +160,18 @@ AutocompleteDirectionsHandler.prototype.route = function () {
         }
         responseObject = response;
         console.log(responseObject);
-
-
-
+        
+        instructions = response.routes[0].legs[0].steps.map((step) => step.instructions);
+        debugger;
+        for(var i=0; i<instructions.length; i++) {
+            $("#directionsPanel").append(instructions[i]);
+        };
     });
 };
 
 
 
-$("#button").on("click", function () {
+$("#submit-button").on("click", function () {
 
     var stepDistance;
     var totalStepDistance;
@@ -268,3 +272,5 @@ $("#button").on("click", function () {
 
             }
 });
+
+// routes[0].legs[0].steps[i].instructions
