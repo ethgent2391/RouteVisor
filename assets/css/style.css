@@ -28,7 +28,7 @@ form {
     z-index: 1; /* The z-index should be higher than Google Maps */
 }
 
-#button {
+#submit-button {
     background-color: var(--dark--turquoise);
     border-color: var(--dark--turquoise);
 }
