@@ -37,11 +37,7 @@ $(document).ready(function () {
             zoom: 4,
             
         });
-        // request = {
-        //     location: center,
-        //     radius: 4000,
-        //     types: ['lodging']
-        // };
+       
         service = new google.maps.places.PlacesService(map);
 
         service.nearbySearch(request, callback);
@@ -228,7 +224,7 @@ $(document).ready(function () {
                      marker = new google.maps.Marker({
                         map: map,
                         position: myLatLng,
-                        
+                        title: 'Stop Point!'                        
 
                     });
                     // console.log(responseObject.routes[0].legs[0].steps[i]);
