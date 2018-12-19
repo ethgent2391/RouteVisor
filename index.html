@@ -51,7 +51,7 @@
             <input type="number" class="form-control" id="max-travel-dist" placeholder="Miles">
         </div>
 
-        <button type="button" id="button" class="btn btn-primary">Submit</button>
+        <button type="button" id="submit-button" class="btn btn-primary">Submit</button>
 
         <!--Facebook iframe-->
         <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fethgent2391.github.io%2Fgroupwo%E2%80%A6&layout=button_count&size=large&mobile_iframe=true&width=84&height=28&appId" width="84" height="28" style="border:none;overflow:hidden;display:block;margin-top:10px" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
@@ -72,52 +72,17 @@
     </div>
 
     <div id="map"></div>
-
+    <div id="directionsPanel"></div>
 
     <!-- we can put the results of the users inputs in cards here -->
     <section class="input-results mt-5 ml-3 mr-3  float-left">
-        <h4>Suggested hotels on your route:</h4>
-        <div class="card-columns">
-            <div class="card">
-                <img class="card-img-top" src="assets/images/180px100.jpg" alt="Hotel Image" />
-                <div class="card-body">
-                    <h5 class="card-title">Hotel Name</h5>
-                    <p class="card-text">Room Rate: </p>
-                    <p class="card-text">Distance from your route: </p>
-                    <p class="card-text">Hotel Rating: </p>
-                    <p class="card-text">Hotel Amentities: </p>
-                    <a href="#" id="button" class="btn btn-primary">Hotel Website</a>
-                </div>
-            </div>
-            <div class="card">
-                <img class="card-img-top" src="assets/images/180px100.jpg" alt="Hotel Image" />
-                <div class="card-body">
-                    <h5 class="card-title">Hotel Name</h5>
-                    <p class="card-text">Room Rate: </p>
-                    <p class="card-text">Distance from your route: </p>
-                    <p class="card-text">Hotel Rating: </p>
-                    <p class="card-text">Hotel Amentities: </p>
-                    <a href="#" id="button" class="btn btn-primary">Hotel Website</a>
-                </div>
-            </div>
-            <div class="card">
-                <img class="card-img-top" src="assets/images/180px100.jpg" alt="pHotel Image" />
-                <div class="card-body">
-                    <h5 class="card-title">Hotel Name</h5>
-                    <p class="card-text">Room Rate: </p>
-                    <p class="card-text">Distance from your route: </p>
-                    <p class="card-text">Hotel Rating: </p>
-                    <p class="card-text">Hotel Amentities: </p>
-                    <a href="#" id="button" class="btn btn-primary">Hotel Website</a>
-                </div>
-            </div>
-        </div>
+        <!-- <h4>Suggested hotels on your route:</h4> -->
 
         <div class="container">
             <div class="row">
-                <div class="col-12 text-center">
-                    <button type="button" id="button" class="col-sm-2 btn btn-primary mt-3 mb-5 center-block">Load More</button>
-                </div>
+                <!-- <div class="col-12 text-center"> -->
+                    <!-- <button type="button"  class="col-sm-2 btn btn-primary mt-3 mb-5 center-block">Load More</button> -->
+                <!-- </div> -->
             </div>
         </div>
        
