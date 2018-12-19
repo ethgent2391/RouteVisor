@@ -25,36 +25,6 @@ $(document).ready(function () {
     firebase.initializeApp(config);
     var database = firebase.database();
 
-var map;
-var position;
-var marker;
-var responseObject;
-var tripDistanceInput;
-var infowindow = new google.maps.InfoWindow();
-var instructions;
-
-var request;
-var service;
-var markers = [];
-
-// Initialize Firebase
-var config = {
-    apiKey: "AIzaSyDdkCpU7scT-GHisDWX3MgHfBBG3oyDmjc",
-    authDomain: "trip-planner-1544292860193.firebaseapp.com",
-    databaseURL: "https://trip-planner-1544292860193.firebaseio.com",
-    projectId: "trip-planner-1544292860193",
-    storageBucket: "trip-planner-1544292860193.appspot.com",
-    messagingSenderId: "676595493403"
-};
-firebase.initializeApp(config);
-var database = firebase.database();
-
-function initMap() {
-    var center = new google.maps.LatLng(41.093598, -81.4393721);
-    map = new google.maps.Map(document.getElementById('map'), {
-        mapTypeControl: false,
-        center: { lat: 41.093598, lng: -81.4393721 },
-        zoom: 4
 
 
 
@@ -192,8 +162,8 @@ function initMap() {
         for(var i=0; i<instructions.length; i++) {
             $("#directionsPanel").append(instructions[i]);
         };
-    });
-};
+    };
+});
 
 
 
