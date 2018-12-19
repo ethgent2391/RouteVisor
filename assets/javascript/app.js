@@ -147,23 +147,37 @@ $(document).ready(function () {
             }
             me.route();
         });
-
+    
     };
-
+    
     AutocompleteDirectionsHandler.prototype.route = function () {
         if (!this.originPlaceId || !this.destinationPlaceId) {
             return;
         }
-        responseObject = response;
-        console.log(responseObject);
-        
-        instructions = response.routes[0].legs[0].steps.map((step) => step.instructions);
-        debugger;
+        var me = this;
+    
+        this.directionsService.route({
+            origin: { 'placeId': this.originPlaceId },
+            destination: { 'placeId': this.destinationPlaceId },
+            travelMode: this.travelMode
+        }, function (response, status) {
+            if (status === 'OK') {
+                me.directionsDisplay.setDirections(response);
+            } else {
+                window.alert('Directions request failed due to ' + status);
+            }
+            responseObject = response;
+            console.log(responseObject);
+            
+            instructions = response.routes[0].legs[0].steps.map((step) => step.instructions);
+    
+            console.log(instructions);
+
         for(var i=0; i<instructions.length; i++) {
             $("#directionsPanel").append(instructions[i]);
         };
-    };
-});
+    });
+};
 
 
 
@@ -267,4 +281,4 @@ $("#submit-button").on("click", function () {
           
 });
 
-// routes[0].legs[0].steps[i].instructions
+})
