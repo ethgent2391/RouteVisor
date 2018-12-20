@@ -11,8 +11,20 @@
   font-weight: 300;
 }
 
-label, #form h4, section h4, .card-title, .card-text {
+#directionsPanel h4,
+#directionsPanel h6,  
+label, 
+#form h4, 
+section h4, 
+.card-title, 
+.card-text,
+#directionsPanel ol {
     color: var(--dark-blue);
+}
+
+#directionsPanel h5 {
+    display: inline;
+    color: var(--dark--turquoise);
 }
 
 header.jumbotron {
@@ -61,4 +73,25 @@ html, body {
 .facebook_iframe {
     margin-top: 10px;
     margin-left:0
+}
+
+.ordered-list {
+    margin-bottom: .5rem;
+}
+
+li {
+    font-size: .8rem;
+}
+
+#directionsPanel {
+    background-color: rgb(170, 219, 209);
+    border-radius: 8px;
+    padding: 10px 15px 10px 15px;
+    margin-bottom: 50px;
+}
+
+#weather {
+    background-color: rgb(170, 219, 209);
+    border-radius: 8px;
+    padding: 10px 15px 10px 15px;
 }

@@ -55,9 +55,13 @@
         <!--Facebook iframe-->
         <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fgroup3tripplanner.herokuapp.com%2F&layout=button_count&size=large&mobile_iframe=true&width=84&height=28&appId" width="84" height="28" style="border:none;overflow:hidden;display:block;margin-top:10px" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
         <br><br>
-        <h4>Right click along the route to <br>find Lodging in other locations.</h4>
+        <h4 class="text-center">Right click along the route to <br>find Lodging in other locations.</h4>
 
     </form>
+
+    <div id="weather"> </div>
+
+
     <!-- ignore this I have it hidden through css but i couldnt get it to display the route without them??? -->
     <div id="mode-selector" class="controls">
         <input type="radio" name="type" id="changemode-walking" checked="checked">
@@ -71,23 +75,9 @@
     </div>
 
     <div id="map"></div>
-    <div id="directionsPanel"></div>
 
     <!-- append directions here -->
-    <section class="input-results mt-5 ml-3 mr-3  float-left">
-
-
-        <div class="container">
-            <div class="row">
-                <!-- <div class="col-12 text-center"> -->
-                    <!-- <button type="button"  class="col-sm-2 btn btn-primary mt-3 mb-5 center-block">Load More</button> -->
-                <!-- </div> -->
-            </div>
-        </div>
-       
-    </section>
-
-
+    <div class="col-md-6 mt-3 ml-5" id="directionsPanel"></div>
 
     
     <script src="assets/javascript/app.js"></script>
