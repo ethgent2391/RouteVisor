@@ -1,3 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Overpass');
+
+body h1, 
+body h2, 
+body h3,
+body h4, 
+body h5, 
+body h6, 
+body p,
+form label {
+    font-family: 'Overpass', sans-serif;
+}
+
 :root {
     --dark-blue: #033f57;
     --medium-blue: #026470;
@@ -84,14 +97,11 @@ li {
 }
 
 #directionsPanel {
-    /* background-color: rgb(170, 219, 209); */
     border-radius: 8px;
     padding: 10px 15px 10px 15px;
     margin-bottom: 50px;
 }
 
-/* #weather {
-    background-color: rgb(170, 219, 209);
-    border-radius: 8px;
-    padding: 10px 15px 10px 15px;
-} */
+.text-center {
+    color: var(--dark-blue);
+}

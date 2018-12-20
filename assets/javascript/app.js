@@ -80,7 +80,7 @@ $(document).ready(function () {
         });
         marker.addListener('click', function () {
             infowindow.open(map, marker);
-            infowindow.setContent("<h4>" + place.name + "</h4><img src='" + place.photos[0].getUrl() + "'height='200px' alt='placephoto'><h5>" + place.vicinity +"</h5></n><p>Rating: " + place.rating + "/5</p>");
+            infowindow.setContent("<h4 class='marker text-center'>" + place.name + "</h4><img src='" + place.photos[0].getUrl() + "'height='200px' class='img-center' alt='placephoto'><h5 class='marker text-center'>" + place.vicinity +"</h5></n><p class='marker text-center'>Rating: " + place.rating + "/5</p>");
             console.log(place);
         })
         return marker;
@@ -184,7 +184,7 @@ $(document).ready(function () {
                   var tempf = Math.floor(celsius * (9/5) + 32);
         
                 console.log(response);
-                $("#weather").append("<div><h3>Weather in "+ response.name +" right now: </h3><h4>" + response.weather[0].description + "</h4><h3>" + tempf + " degrees</h3>" + "</h4></div>")
+                $("#weather").html("<div><h4 class='text-center mt-5'>Weather in "+ response.name +" right now: </h4><h5 class='text-center'>" + response.weather[0].description + "</h5><h4 class='text-center'>" + tempf + " degrees</h4>" + "</h4></div>")
                   coinsole.log(response)
                 });
               }
@@ -198,7 +198,7 @@ $(document).ready(function () {
     
             console.log(instructions);
 
-            $("#directionsPanel").append(
+            $("#directionsPanel").html(
                 `<h4 class="mt-3 row col-md-12">${response.routes[0].legs[0].start_address} to ${response.routes[0].legs[0].end_address}</h4>
                 <h5 class="mb-5 mr-2"> Distance: ${response.routes[0].legs[0].distance.text}</h5>
                 <h5 class="mb-5 ml-2"> Duration: ${response.routes[0].legs[0].duration.text}</h5>
