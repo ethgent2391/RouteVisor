@@ -1,14 +1,11 @@
 $(document).ready(function () {
-
+    // Declare variables
     var map;
     var position;
     var marker;
     var responseObject;
     var tripDistanceInput;
     var infowindow = new google.maps.InfoWindow();
-
-    
-    
     var request;
     var service;
     var markers = [];
@@ -23,26 +20,22 @@ $(document).ready(function () {
         messagingSenderId: "676595493403"
     };
     firebase.initializeApp(config);
-    var database = firebase.database();
+    var database = firebase.database();   
 
-
-    
-      
-
+    // Define initMap function
     function initMap() {
+        // center map
         var center = new google.maps.LatLng(41.093598, -81.4393721);
         map = new google.maps.Map(document.getElementById('map'), {
             mapTypeControl: false,
-            center: { lat: 41.093598, lng: -81.4393721 },
-            
-            zoom: 4,
-            
+            center: { lat: 41.093598, lng: -81.4393721 },       
+            zoom: 4,            
         });
        
+        // Initialize Places Service part of the API
         service = new google.maps.places.PlacesService(map);
 
-        service.nearbySearch(request, callback);
-
+        // display nearby lodging when user right clicks along the route
         google.maps.event.addListener(map, 'rightclick', function (event) {
             map.setCenter(event.latLng)
             // clearResults(markers)
@@ -53,13 +46,14 @@ $(document).ready(function () {
                 types: ['lodging'],
                 title: 'Stop Point!',
                 icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-
             };
+            
             service.nearbySearch(request, callback);
-        })
+        });
 
+        // Initialize autocomplete
         new AutocompleteDirectionsHandler(map);
-    }
+    };
 
     function callback(results, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -69,6 +63,7 @@ $(document).ready(function () {
         }
     }
 
+    // define function to create markers for waypoints
     function createMarker(place) {
         var placeLoc = place.geometry.location;
         var marker = new google.maps.Marker({
@@ -76,26 +71,28 @@ $(document).ready(function () {
             position: place.geometry.location,
             title: 'Stop Point!',
             icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
-
         });
+
+        // when the user clicks a marker, show infoWindow with name, photo, vicinity, and rating
         marker.addListener('click', function () {
             infowindow.open(map, marker);
             infowindow.setContent("<h4 class='marker text-center'>" + place.name + "</h4><img src='" + place.photos[0].getUrl() + "'height='200px' class='img-center' alt='placephoto'><h5 class='marker text-center'>" + place.vicinity +"</h5></n><p class='marker text-center'>Rating: " + place.rating + "/5</p>");
-            console.log(place);
-        })
+        });
+        
         return marker;
-    }
+    };
 
     function clearResults(markers) {
         for (var m in markers) {
             markers[m].setMap(null)
-        }
+        };
         markers = [];
-    }
+    };
 
+    // run initMap when window loads
     google.maps.event.addDomListener(window, 'load', initMap);
     
-
+    // define AutocompleteDirectionsHandler function
     function AutocompleteDirectionsHandler(map) {
         this.map = map;
         this.originPlaceId = null;
@@ -103,7 +100,6 @@ $(document).ready(function () {
         this.travelMode = 'DRIVING';
         var originInput = document.getElementById('start-point');
         var destinationInput = document.getElementById('destination');
-        var modeSelector = document.getElementById('mode-selector');
         this.directionsService = new google.maps.DirectionsService;
         this.directionsDisplay = new google.maps.DirectionsRenderer;
         this.directionsDisplay.setMap(map);
@@ -114,24 +110,9 @@ $(document).ready(function () {
         var destinationAutocomplete = new google.maps.places.Autocomplete(
             destinationInput, { placeIdOnly: true });
             console.log(destinationAutocomplete);
-        // this.setupClickListener('changemode-walking', 'WALKING');
-        // this.setupClickListener('changemode-transit', 'TRANSIT');
-        // this.setupClickListener('changemode-driving', 'DRIVING');
 
         this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
         this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
-
-    }
-
-    // Sets a listener on a radio button to change the filter type on Places
-    // Autocomplete.
-    AutocompleteDirectionsHandler.prototype.setupClickListener = function (id, mode) {
-        var radioButton = document.getElementById(id);
-        var me = this;
-        radioButton.addEventListener('click', function () {
-            me.travelMode = mode;
-            me.route();
-        });
     };
 
     AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function (autocomplete, mode) {
