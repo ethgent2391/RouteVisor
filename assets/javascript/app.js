@@ -79,7 +79,8 @@ $(document).ready(function () {
         });
         marker.addListener('click', function () {
             infowindow.open(map, marker);
-            infowindow.setContent(place.name);
+            infowindow.setContent("<h4>" + place.name + "</h4><img src='" + place.photos[0].getUrl() + "'height='200px' alt='placephoto'><h5>" + place.vicinity +"</h5></n><p>Rating: " + place.rating + "/5</p>");
+            console.log(place);
         })
         return marker;
     }
