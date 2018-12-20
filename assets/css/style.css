@@ -1,0 +1,97 @@
+:root {
+    --dark-blue: #033f57;
+    --medium-blue: #026470;
+    --dark--turquoise: #009484;
+    --medium--turquoise: #02B28D;
+}
+
+#description {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+#directionsPanel h4,
+#directionsPanel h6,  
+label, 
+#form h4, 
+section h4, 
+.card-title, 
+.card-text,
+#directionsPanel ol {
+    color: var(--dark-blue);
+}
+
+#directionsPanel h5 {
+    display: inline;
+    color: var(--dark--turquoise);
+}
+
+header.jumbotron {
+    padding: 15px;
+    background-color: var(--medium-blue);
+    color: white;
+    margin-bottom: 0;
+}
+
+form {
+    background-color: rgba(255,255,255,.95);
+    border-radius: 8px;
+    z-index: 1; /* The z-index should be higher than Google Maps */
+}
+
+#submit-button {
+    background-color: var(--dark--turquoise);
+    border-color: var(--dark--turquoise);
+}
+
+
+#map {
+    height: 100%;
+
+}
+  /* Optional: Makes the sample page fill the window. */
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+#start-point:focus,
+#destination:focus {
+    border-color: var(--dark--turquoise);
+}
+
+#mode-selector {
+    visibility: hidden;
+    position: absolute;
+    left: -200;
+}
+
+.facebook_iframe {
+    margin-top: 10px;
+    margin-left:0
+}
+
+.ordered-list {
+    margin-bottom: .5rem;
+}
+
+li {
+    font-size: .8rem;
+}
+
+#directionsPanel {
+    background-color: rgb(170, 219, 209);
+    border-radius: 8px;
+    padding: 10px 15px 10px 15px;
+    margin-bottom: 50px;
+}
+
+#weather {
+    background-color: rgb(170, 219, 209);
+    border-radius: 8px;
+    padding: 10px 15px 10px 15px;
+}
