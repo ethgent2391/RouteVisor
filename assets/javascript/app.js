@@ -152,7 +152,7 @@ $(document).ready(function () {
             }
             responseObject = response;
 
-            
+             // weather api queried and set to display weather based on user's desired end location
             function weathersrch(){
                 var weatherinput = response.routes[0].legs[0].end_address
                 
@@ -169,6 +169,7 @@ $(document).ready(function () {
                   coinsole.log(response)
                 });
               }
+
               weathersrch();
             
             console.log(response.request.destination.placeId);
@@ -179,6 +180,7 @@ $(document).ready(function () {
     
             console.log(instructions);
 
+            //writes directions to html
             $("#directionsPanel").html(
                 `<h4 class="mt-3 row col-md-12">${response.routes[0].legs[0].start_address} to ${response.routes[0].legs[0].end_address}</h4>
                 <h5 class="mb-5 mr-2"> Distance: ${response.routes[0].legs[0].distance.text}</h5>
@@ -195,8 +197,8 @@ $(document).ready(function () {
 };
 
 
-
-$("#submit-button").on("click", function () {
+    // on click that will display the waypoints on the route
+    $("#submit-button").on("click", function () {
 
         var stepDistance;
         var totalStepDistance;
@@ -206,7 +208,6 @@ $("#submit-button").on("click", function () {
         console.log(tripDistanceInput);
         tripIncriment = tripDistanceInput;
         console.log(responseObject);
-        // console.log(response.routes[0].legs[0].steps);
 
         var j = 0; // var j is the index of the object step
         stepsArrayLength = responseObject.routes[0].legs[0].steps.length; //length of steps in the route
@@ -228,12 +229,8 @@ $("#submit-button").on("click", function () {
             stepDistanceMiles = stepDistance / 1609.344; // distance in miles for each step of the trip
             totalStepDistance = totalStepDistance + stepDistanceMiles; //adds each step distance for each index
 
-            // console.log(totalStepDistance);
-            // console.log(i);
-
             //checks to verify if total trip distance is greater than user distance input
             if (totalTripDistanceMiles >= tripDistanceInput) {
-                // console.log("distance is greater than " + tripDistanceInput + " miles");
 
                 if (totalStepDistance >= tripDistanceInput) {
                     position = responseObject.routes[0].legs[0].steps[i].end_location;
@@ -247,8 +244,7 @@ $("#submit-button").on("click", function () {
                         title: 'Stop Point!'                        
 
                     });
-                    // console.log(responseObject.routes[0].legs[0].steps[i]);
-                    // console.log(myLatLng);
+
                     tripDistanceInput = tripDistanceInput + tripIncriment; //add trip max daily distance 
                     waypointsArray.push(myLatLng);
                     console.log(waypointsArray);
@@ -256,10 +252,7 @@ $("#submit-button").on("click", function () {
 
                 }
 
-
                 console.log(tripDistanceInput);
-
-
 
             }
 
