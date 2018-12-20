@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
     <!-- Facebook Share Button Meta Tags -->
-    <meta property="og:type"          content="website" />
-    <meta property="og:title"         content="RouteVisor" />
-    <meta property="og:description"   content="Don't drive drowsy! Plan to take a break along your route." />
-    <meta property="og:image"         content="https://d27k8xmh3cuzik.cloudfront.net/wp-content/uploads/2016/09/countries-drive-from-india-cover2.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="RouteVisor" />
+    <meta property="og:description" content="Don't drive drowsy! Plan to take a break along your route." />
+    <meta property="og:image" content="https://d27k8xmh3cuzik.cloudfront.net/wp-content/uploads/2016/09/countries-drive-from-india-cover2.jpg" />
 
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css" />
@@ -21,7 +21,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
 
-    
+
 
 </head>
 
@@ -52,12 +52,14 @@
         <button type="button" id="submit-button" class="btn btn-primary">Submit</button>
 
         <!--Facebook iframe-->
-        <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fgroup3tripplanner.herokuapp.com%2F&layout=button_count&size=large&mobile_iframe=true&width=84&height=28&appId" width="84" height="28" style="border:none;overflow:hidden;display:block;margin-top:10px" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fgroup3tripplanner.herokuapp.com%2F&layout=button_count&size=large&mobile_iframe=true&width=84&height=28&appId"
+            width="84" height="28" style="border:none;overflow:hidden;display:block;margin-top:10px" scrolling="no"
+            frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
         <br><br>
         <h4 class="text-center">Right click along the route to <br>find lodging in other locations.</h4>
 
         <div id="weather"></div>
-    
+
     </form>
 
 
@@ -79,7 +81,7 @@
     <!-- append directions here -->
     <div class="col-md-6 mt-3 ml-5" id="directionsPanel"></div>
 
-    
+
     <script src="assets/javascript/app.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFhkxjfneoXB2xv2kVRkO376AHqTXyqzU&libraries=places&callback=initMap"
         async defer></script>
