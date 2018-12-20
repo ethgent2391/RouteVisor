@@ -84,14 +84,14 @@ li {
 }
 
 #directionsPanel {
-    background-color: rgb(170, 219, 209);
+    /* background-color: rgb(170, 219, 209); */
     border-radius: 8px;
     padding: 10px 15px 10px 15px;
     margin-bottom: 50px;
 }
 
-#weather {
+/* #weather {
     background-color: rgb(170, 219, 209);
     border-radius: 8px;
     padding: 10px 15px 10px 15px;
-}
+} */

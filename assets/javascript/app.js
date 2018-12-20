@@ -26,7 +26,8 @@ $(document).ready(function () {
     var database = firebase.database();
 
 
-
+    
+      
 
     function initMap() {
         var center = new google.maps.LatLng(41.093598, -81.4393721);
@@ -109,9 +110,10 @@ $(document).ready(function () {
 
         var originAutocomplete = new google.maps.places.Autocomplete(
             originInput, { placeIdOnly: true });
+            
         var destinationAutocomplete = new google.maps.places.Autocomplete(
             destinationInput, { placeIdOnly: true });
-
+            console.log(destinationAutocomplete);
         // this.setupClickListener('changemode-walking', 'WALKING');
         // this.setupClickListener('changemode-transit', 'TRANSIT');
         // this.setupClickListener('changemode-driving', 'DRIVING');
@@ -168,6 +170,28 @@ $(document).ready(function () {
                 window.alert('Directions request failed due to ' + status);
             }
             responseObject = response;
+
+            
+            function weathersrch(){
+                var weatherinput = response.routes[0].legs[0].end_address
+                
+            $.ajax({
+                url: "https://api.openweathermap.org/data/2.5/weather?q=" + weatherinput +"&APPID=1488d45564a266db9560e76d8c1a9c18",
+                method: "GET"
+              }).then(function(response) {
+                  var kelvin = response.main.temp
+                  var celsius = kelvin - 273;
+                  var tempf = Math.floor(celsius * (9/5) + 32);
+        
+                console.log(response);
+                $("#weather").append("<div><h3>Weather in "+ response.name +" right now: </h3><h4>" + response.weather[0].description + "</h4><h3>" + tempf + " degrees</h3>" + "</h4></div>")
+                  coinsole.log(response)
+                });
+              }
+              weathersrch();
+            
+            console.log(response.request.destination.placeId);
+
             console.log(responseObject);
             
             instructions = response.routes[0].legs[0].steps.map((step) => step.instructions);
@@ -287,8 +311,7 @@ $("#submit-button").on("click", function () {
 
 
         });
-
-          
+     
 });
 
 })
