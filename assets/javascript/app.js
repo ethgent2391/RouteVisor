@@ -1,4 +1,24 @@
+function mobile_layout(){
+    var viewportWidth = $(window).width();
+    if (viewportWidth < 980) {
+        $("form").removeClass("col-md-4");
+        $("form").addClass("col-md-12");
+        $("#start").removeClass("col-md-12 row");
+        $("#start").addClass("col-md-5");
+
+        $("#dest").removeClass("col-md-12 row");
+        $("#dest").addClass("col-md-5");
+
+        $("#distance").removeClass("col-md-12 row");
+        $("#distance").addClass("col-md-5");
+
+
+    }
+}
+mobile_layout();
+
 $(document).ready(function () {
+    
     // Declare variables
     var map;
     var position;

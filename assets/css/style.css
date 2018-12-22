@@ -51,6 +51,7 @@ form {
     background-color: rgba(255,255,255,.95);
     border-radius: 8px;
     z-index: 1; /* The z-index should be higher than Google Maps */
+    float: right;
 }
 
 #submit-button {
@@ -88,6 +89,13 @@ html, body {
     margin-left:0
 }
 
+#fb-iframe {
+    margin-top: 10px;
+    border: none;
+    overflow: hidden;
+    display: block;
+}
+
 .ordered-list {
     margin-bottom: .5rem;
 }
@@ -104,4 +112,47 @@ li {
 
 .text-center {
     color: var(--dark-blue);
+}
+
+@media screen and (max-width:980px) {
+    form {
+        z-index: 0;
+        clear: both;
+        display: inline;
+        position: static;
+        width: 100%;
+    }
+
+    #map {
+        display: block;
+        width: 100%;
+
+    }
+
+    #start {
+        float: left;
+    }
+
+    #dest {
+        float: left;
+        margin-left: 5px;
+    }
+
+    #distance {
+        clear: both;
+        float: left;
+    }
+
+    #submit-button {
+        float: left;
+    }
+
+    #fb-iframe {
+        float: left;
+        margin-left: 5px;
+    }
+
+    #add-lodging {
+        clear: both;
+    }
 }
