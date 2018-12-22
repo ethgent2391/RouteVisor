@@ -12,6 +12,7 @@ function mobile_layout(){
         $("#distance").removeClass("col-md-12 row");
         $("#distance").addClass("col-md-5");
 
+        $("#map").removeClass("col-md-8");
 
     }
 }
@@ -185,7 +186,7 @@ $(document).ready(function () {
                   var tempf = Math.floor(celsius * (9/5) + 32);
         
                 console.log(response);
-                $("#weather").html("<div><h4 class='text-center mt-5'>Weather in "+ response.name +" right now: </h4><h5 class='text-center'>" + response.weather[0].description + "</h5><h4 class='text-center'>" + tempf + " degrees</h4>" + "</h4></div>")
+                $("#weather").html("<h4>Weather in "+ response.name +" right now: </h4><h5>" + response.weather[0].description + "</h5><h4>" + tempf + " degrees</h4>" + "</h4>")
                   coinsole.log(response)
                 });
               }
