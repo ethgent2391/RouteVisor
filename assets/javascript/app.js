@@ -1,4 +1,27 @@
+function mobile_layout(){
+    var viewportWidth = $(window).width();
+    if (viewportWidth < 980) {
+        $("form").removeClass("col-md-4");
+        $("form").addClass("col-md-12");
+        $("#start").removeClass("col-md-12 row");
+        $("#start").addClass("col-md-5");
+
+        $("#dest").removeClass("col-md-12 row");
+        $("#dest").addClass("col-md-5");
+
+        $("#distance").removeClass("col-md-12 row");
+        $("#distance").addClass("col-md-5");
+
+        $("#map").removeClass("col-md-8");
+
+        $("#directionsPanel").removeClass("col-md-6");
+        $("#directionsPanel").addClass("col-md-12");
+    }
+}
+mobile_layout();
+
 $(document).ready(function () {
+    
     // Declare variables
     var map;
     var position;
@@ -165,7 +188,7 @@ $(document).ready(function () {
                   var tempf = Math.floor(celsius * (9/5) + 32);
         
                 console.log(response);
-                $("#weather").html("<div><h4 class='text-center mt-5'>Weather in "+ response.name +" right now: </h4><h5 class='text-center'>" + response.weather[0].description + "</h5><h4 class='text-center'>" + tempf + " degrees</h4>" + "</h4></div>")
+                $("#weather").html("<h4>Weather in "+ response.name +" right now: </h4><h5>" + response.weather[0].description + "</h5><h4>" + tempf + " degrees</h4>" + "</h4>")
                   coinsole.log(response)
                 });
               }
@@ -181,17 +204,16 @@ $(document).ready(function () {
             console.log(instructions);
 
             //writes directions to html
-            $("#directionsPanel").html(
+            $("#directionsPanel").prepend(
                 `<h4 class="mt-3 row col-md-12">${response.routes[0].legs[0].start_address} to ${response.routes[0].legs[0].end_address}</h4>
                 <h5 class="mb-5 mr-2"> Distance: ${response.routes[0].legs[0].distance.text}</h5>
                 <h5 class="mb-5 ml-2"> Duration: ${response.routes[0].legs[0].duration.text}</h5>
                 <h6 class="displayDirections mt-5"> Directions </h6>`)
     
             for(var i=0; i<instructions.length; i++) {
-                $("#directionsPanel").append(
-                    `<ol class="ordered-list">
-                        <li>${instructions[i]}</li>
-                    </ol>`)
+                $("#ordered-list").append(
+                    `<li>${instructions[i]}</li>`
+                    )
             };
     });
 };

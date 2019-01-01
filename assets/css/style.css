@@ -49,8 +49,10 @@ header.jumbotron {
 
 form {
     background-color: rgba(255,255,255,.95);
-    border-radius: 8px;
+    /* border-radius: 8px; */
     z-index: 1; /* The z-index should be higher than Google Maps */
+    float: right;
+    /* overflow: auto; */
 }
 
 #submit-button {
@@ -61,7 +63,8 @@ form {
 
 #map {
     height: 100%;
-
+    width: 100%;
+    margin: 0;
 }
   /* Optional: Makes the sample page fill the window. */
 
@@ -77,6 +80,16 @@ html, body {
     border-color: var(--dark--turquoise);
 }
 
+#add-lodging {
+    text-align: center;
+    width: 100%;
+}
+
+#weather {
+    text-align: center;
+    margin-top: 20px;
+}
+
 #mode-selector {
     visibility: hidden;
     position: absolute;
@@ -86,6 +99,14 @@ html, body {
 .facebook_iframe {
     margin-top: 10px;
     margin-left:0
+}
+
+#fb-iframe {
+    margin-top: 10px;
+    border: none;
+    overflow: hidden;
+    display: block;
+    width: 100%;
 }
 
 .ordered-list {
@@ -104,4 +125,88 @@ li {
 
 .text-center {
     color: var(--dark-blue);
+}
+
+ol {
+    list-style: decimal inside none;
+}
+
+@media screen and (max-width:980px) {
+    body {
+        width: 100%;
+    }
+    
+    form {
+        z-index: 0;
+        clear: both;
+        display: inline;
+        position: static;
+        width: 100%;
+    }
+
+    #map {
+        display: block;
+        width: 100%;
+
+    }
+
+    #start {
+        float: left;
+    }
+
+    #dest {
+        float: left;
+        margin-left: 5px;
+    }
+
+    #distance {
+        clear: both;
+        float: left;
+    }
+
+    #submit-button {
+        float: left;
+        margin-left: 15px;
+        margin-top: 33px;
+    }
+
+    #fb-iframe {
+        float: left;
+        margin-left: 5px;
+        width: auto;
+        margin-top: 43px;
+    }
+
+    #add-lodging {
+        clear: both;
+        float: left;
+        text-align: left;
+        margin-top: 10px;
+        width: auto;
+    }
+
+   #weather {
+       float: left;
+       text-align: center;
+       margin-top: 10px;
+       margin-left: 10px;
+   }
+}
+
+@media screen and (max-width:425px) {
+    #submit-button {
+        margin-top: 0;
+    }
+
+    #fb-iframe {
+        margin-top: 10px;
+    }
+
+    #weather {
+        margin-left: 10%;
+    }
+
+    #add-lodging {
+        margin-left: 10%;
+    }
 }
