@@ -127,6 +127,10 @@ li {
     color: var(--dark-blue);
 }
 
+ol {
+    list-style: decimal inside none;
+}
+
 @media screen and (max-width:980px) {
     body {
         width: 100%;
@@ -163,12 +167,14 @@ li {
     #submit-button {
         float: left;
         margin-left: 15px;
+        margin-top: 33px;
     }
 
     #fb-iframe {
         float: left;
         margin-left: 5px;
         width: auto;
+        margin-top: 43px;
     }
 
     #add-lodging {
@@ -185,4 +191,22 @@ li {
        margin-top: 10px;
        margin-left: 10px;
    }
+}
+
+@media screen and (max-width:425px) {
+    #submit-button {
+        margin-top: 0;
+    }
+
+    #fb-iframe {
+        margin-top: 10px;
+    }
+
+    #weather {
+        margin-left: 10%;
+    }
+
+    #add-lodging {
+        margin-left: 10%;
+    }
 }

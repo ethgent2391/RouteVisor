@@ -14,6 +14,8 @@ function mobile_layout(){
 
         $("#map").removeClass("col-md-8");
 
+        $("#directionsPanel").removeClass("col-md-6");
+        $("#directionsPanel").addClass("col-md-12");
     }
 }
 mobile_layout();
@@ -202,17 +204,16 @@ $(document).ready(function () {
             console.log(instructions);
 
             //writes directions to html
-            $("#directionsPanel").html(
+            $("#directionsPanel").prepend(
                 `<h4 class="mt-3 row col-md-12">${response.routes[0].legs[0].start_address} to ${response.routes[0].legs[0].end_address}</h4>
                 <h5 class="mb-5 mr-2"> Distance: ${response.routes[0].legs[0].distance.text}</h5>
                 <h5 class="mb-5 ml-2"> Duration: ${response.routes[0].legs[0].duration.text}</h5>
                 <h6 class="displayDirections mt-5"> Directions </h6>`)
     
             for(var i=0; i<instructions.length; i++) {
-                $("#directionsPanel").append(
-                    `<ol class="ordered-list">
-                        <li>${instructions[i]}</li>
-                    </ol>`)
+                $("#ordered-list").append(
+                    `<li>${instructions[i]}</li>`
+                    )
             };
     });
 };
