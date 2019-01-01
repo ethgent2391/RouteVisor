@@ -203,6 +203,10 @@ $(document).ready(function () {
     
             console.log(instructions);
 
+            // empty directtionsPanel
+            $("#directionsPanel").html(
+                `<ol id="ordered-list" type=1></ol>`
+            )
             //writes directions to html
             $("#directionsPanel").prepend(
                 `<h4 class="mt-3 row col-md-12">${response.routes[0].legs[0].start_address} to ${response.routes[0].legs[0].end_address}</h4>
