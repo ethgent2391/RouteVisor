@@ -114,7 +114,7 @@ html, body {
 }
 
 li {
-    font-size: .8rem;
+    font-size: .9rem;
 }
 
 #directionsPanel {
@@ -129,6 +129,7 @@ li {
 
 ol {
     list-style: decimal inside none;
+    line-height: 2;
 }
 
 @media screen and (max-width:980px) {
